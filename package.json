@@ -20,7 +20,7 @@
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/wappalyzer/wappalyzer"
+    "url": "https://github.com/tylerpuig/wapalyzer-core"
   },
   "funding": [
     {
