@@ -29,6 +29,8 @@
   ],
   "main": "wappalyzer.js",
   "files": [
-    "wappalyzer.js"
+    "wappalyzer.js",
+    "categories.json",
+    "technologies.json"
   ]
 }
