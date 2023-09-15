@@ -1,6 +1,6 @@
 # Wappalyzer core
 
-[Wappalyzer](https://www.wappalyzer.com/) identifies technologies on websites.
+[Wappalyzer](https://www.wappalyzer.com/) identifies technologies on websites. Wapalyzer Core allows you to analyze websites and identify technologies used. This package provides the core functionalities along with a set of predefined technologies and categories. However, you're free to use your own data or modify the provided one.
 
 This is a community fork of the now removed wappalyzer-core project, initially developed by [@AliasIO](https://github.com/AliasIO).
 
@@ -13,23 +13,18 @@ $ npm i wapalyzer-core
 ## Usage
 
 ```javascript
-const Wappalyzer = require("wapalyzer-core");
+const { Wappalyzer, technologies, categories } = require("wapalyzer-core");
 
-// Loading data files
-const categories = require("./categories.json");
-const technologies = require("./technologies.json");
-
-/**
- * Sets up Wappalyzer with necessary data.
- */
+// Sets up Wappalyzer with necessary data.
 function setupWappalyzer() {
+  // You can use the provided technologies and categories data,
+  // or provide your own data if needed.
   Wappalyzer.setTechnologies(technologies);
   Wappalyzer.setCategories(categories);
 }
 
-/**
- * Analyzes a website and prints the results.
- */
+// Analyzes a website and prints the results.
+
 async function analyzeWebsite() {
   try {
     const result = await Wappalyzer.analyze({
