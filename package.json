@@ -1,6 +1,6 @@
 {
   "name": "wapalyzer-core",
-  "description": "Identify technology on websites",
+  "description": "Identify technologies on websites",
   "keywords": [
     "wappalyzer",
     "wappalyzer-core",
@@ -15,7 +15,7 @@
     "software"
   ],
   "homepage": "https://www.wappalyzer.com/",
-  "version": "6.10.66",
+  "version": "6.10.67",
   "author": "Wappalyzer",
   "license": "GPL-3.0",
   "repository": {
