@@ -13,44 +13,45 @@ $ npm i wapalyzer-core
 ## Usage
 
 ```javascript
-#!/usr/bin/env node
+const Wappalyzer = require("wapalyzer-core");
 
-const fs = require("fs");
-const Wappalyzer = require("./wappalyzer");
+// Loading data files
+const categories = require("./categories.json");
+const technologies = require("./technologies.json");
 
-// See https://github.com/wappalyzer/wappalyzer/blob/master/README.md#specification
-const categories = JSON.parse(
-  fs.readFileSync(path.resolve(`./categories.json`))
-);
-
-let technologies = {};
-
-for (const index of Array(27).keys()) {
-  const character = index ? String.fromCharCode(index + 96) : "_";
-
-  technologies = {
-    ...technologies,
-    ...JSON.parse(
-      fs.readFileSync(path.resolve(`./technologies/${character}.json`))
-    ),
-  };
+/**
+ * Sets up Wappalyzer with necessary data.
+ */
+function setupWappalyzer() {
+  Wappalyzer.setTechnologies(technologies);
+  Wappalyzer.setCategories(categories);
 }
 
-Wappalyzer.setTechnologies(technologies);
-Wappalyzer.setCategories(categories);
+/**
+ * Analyzes a website and prints the results.
+ */
+async function analyzeWebsite() {
+  try {
+    const result = await Wappalyzer.analyze({
+      url: "https://example.github.io/",
+      meta: { generator: ["WordPress"] },
+      headers: { server: ["Nginx"] },
+      scriptSrc: ["jquery-3.0.0.js"],
+      cookies: { awselb: [""] },
+      html: '<div ng-app="">',
+    });
 
-Wappalyzer.analyze({
-  url: "https://example.github.io/",
-  meta: { generator: ["WordPress"] },
-  headers: { server: ["Nginx"] },
-  scriptSrc: ["jquery-3.0.0.js"],
-  cookies: { awselb: [""] },
-  html: '<div ng-app="">',
-}).then((detections) => {
-  const results = Wappalyzer.resolve(detections);
+    console.log(result);
+  } catch (error) {
+    console.error("Error analyzing website:", error);
+  }
+}
 
-  console.log(results);
-});
+// This will run when the module is loaded
+console.log("Setting up Wappalyzer...");
+setupWappalyzer();
+console.log("Analyzing website...");
+analyzeWebsite();
 ```
 
 You can view the latest technology JSON files [here](https://github.com/enthec/webappanalyzer) or [here](https://github.com/Lissy93/wapalyzer).
