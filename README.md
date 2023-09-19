@@ -1,6 +1,6 @@
 # Wappalyzer core
 
-[Wappalyzer](https://www.wappalyzer.com/) identifies technologies on websites. Wapalyzer Core allows you to analyze websites and identify technologies used. This package provides the core functionalities along with a set of predefined technologies and categories. However, you're free to use your own data or modify the provided one.
+[Wappalyzer](https://www.wappalyzer.com/) identifies technologies on websites. Wapalyzer Core allows you to analyze websites and identify technologies used. This package provides the core functionalities along with a set of predefined technologies and categories. However, you're free to use your own data or modify the provided ones.
 
 This is a community fork of the now removed wappalyzer-core project, initially developed by [@AliasIO](https://github.com/AliasIO).
 
@@ -8,6 +8,22 @@ This is a community fork of the now removed wappalyzer-core project, initially d
 
 ```shell
 $ npm i wapalyzer-core
+```
+
+#### CommonJS
+
+If you are using a CommonJS environment, you can `require` the package like so:
+
+```javascript
+const { Wappalyzer, technologies, categories } = require("wapalyzer-core");
+```
+
+#### ES Modules
+
+If you are using ES Modules, you can import the package like this:
+
+```javascript
+import { Wappalyzer, technologies, categories } from "wapalyzer-core";
 ```
 
 ## Usage
@@ -27,7 +43,8 @@ function setupWappalyzer() {
 
 async function analyzeWebsite() {
   try {
-    const result = await Wappalyzer.analyze({
+    // Get the raw list of detections
+    const detections = await Wappalyzer.analyze({
       url: "https://example.github.io/",
       meta: { generator: ["WordPress"] },
       headers: { server: ["Nginx"] },
@@ -36,6 +53,8 @@ async function analyzeWebsite() {
       html: '<div ng-app="">',
     });
 
+    // Resolves the list of detections
+    const result = Wappalyzer.resolve(detections);
     console.log(result);
   } catch (error) {
     console.error("Error analyzing website:", error);

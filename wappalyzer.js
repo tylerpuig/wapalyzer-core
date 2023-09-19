@@ -683,10 +683,4 @@ const Wappalyzer = {
   },
 };
 
-if (typeof module !== "undefined") {
-  module.exports = {
-    Wappalyzer: Wappalyzer,
-    technologies: require("./technologies.json"),
-    categories: require("./categories.json"),
-  };
-}
+module.exports = Wappalyzer;

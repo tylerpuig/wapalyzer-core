@@ -12,10 +12,11 @@
     "cms",
     "framework",
     "library",
-    "software"
+    "software",
+    "wapalyzer"
   ],
   "homepage": "https://www.wappalyzer.com/",
-  "version": "6.10.67",
+  "version": "6.11.0",
   "author": "Wappalyzer",
   "license": "GPL-3.0",
   "repository": {
@@ -27,10 +28,12 @@
       "url": "https://github.com/sponsors/aliasio"
     }
   ],
-  "main": "wappalyzer.js",
-  "files": [
-    "wappalyzer.js",
-    "categories.json",
-    "technologies.json"
-  ]
+  "main": "./index.cjs.js",
+  "module": "./index.mjs",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.cjs.js"
+    }
+  }
 }
